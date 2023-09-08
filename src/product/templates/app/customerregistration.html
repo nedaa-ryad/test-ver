@@ -1,0 +1,50 @@
+{% extends "app/base.html" %}
+{% load static %}
+
+{% block title %}
+CUSTOMER REGISTRATION
+{% endblock title %}
+
+{% block main_content %}
+
+<div class="register">
+    <div class="container">
+        <div class="home-page">
+            <a href="{% url 'products:homePage' %}">home</a>
+            <span>/ register</span>
+        </div>
+        <div>
+            <h2>new customer</h2>
+            <form method="post">
+                {% csrf_token %}
+                {% for fm in form %}
+                {{fm.label_tag}} {{fm}} 
+                <small class="error"> {{fm.errors|striptags}} </small>
+                {% endfor %}
+
+                <input type="submit" value="Register">
+                <div>
+                    <a href="{% url 'products:login' %}" >back to login</a>
+                </div>
+
+                {% if form.non_field_errors %}
+                    {% for error in form.non_field_errors %}
+                        <p class="error">
+                            {{error}}
+                        </p>
+                    {% endfor %}
+                {% endif %}
+
+                {% if messages %}
+                    {% for msg in messages %}
+                        <div class="alert alert-{{msg.tags}}" role="alert">
+                            {{msg}}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </form>
+        </div>
+    </div>
+</div>
+
+{%endblock main_content %}

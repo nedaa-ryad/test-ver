@@ -1,0 +1,87 @@
+{% extends "app/base.html" %}
+{% load static %}
+
+{% block title %} ABOUT US {% endblock title %}
+
+
+{% block main_content %}
+<div class="company-logo">
+    <div class="container">
+        <div>
+            <img src="{% static 'app/images/logo-page_.png ' %}" alt="logo">
+            <h2>white dove</h2>
+        </div>
+    </div>
+</div>
+
+<div class="about-page">
+    <div class="container">
+        <div class="home-page">
+            <a href="{% url 'products:homePage' %}">home</a>
+            <span>/ About Us</span>
+        </div>
+        <div class="content">
+            <div class="box">
+                <h2>al riyadh, saudi arabia excellence in luxury furnishings</h2>
+                <p> al riyadh, saudi arabia lifestyle ambassador with a furniture selection from a superior classic
+                    collection to a fluid modern style</p>
+                <p>born from the desire to create fine furnishings, the company stands out for its unique and exclusive
+                    style, where the
+                    excellence of its artisanal production, inspired by al riyadh, saudi arabia craftsmanship, blends
+                    with innovative production
+                    technologies and superior internationally recognized designers.</p>
+                <a href="{% url 'products:history' %}">history</a>
+            </div>
+            <div class="box">
+                <img src=" {% static 'app/images/banner/about_us_1.jpg' %}" alt="">
+                <img src=" {% static 'app/images/banner/about_us_2.jpg' %}" alt="">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="bg-attachment">
+    <div class="about-bg"></div>
+</div>
+
+<div class="designer">
+    <div class="container">
+        <div class="content">
+            <div class="box">
+                <img src="{% static 'app/images/banner/furniture-designer.jpg' %}" alt="Furniture Designer">
+            </div>
+            <div class="box">
+                <div class="info">
+                    <h3>meet the designer</h3>
+                    <span>white dove</span>
+                </div>
+                <div class="info">
+                    <h4>when did you realize you wanted to be a designer?</h4>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem repellat aliquam harum porro
+                        quibusdam debitis quos unde ad earum fugit soluta rem voluptate pariatur, id doloribus
+                        blanditiis hic, cupiditate minima.</p>
+                </div>
+                <div class="info">
+                    <h4>what is the next object you would like to design?</h4>
+                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Debitis illum autem cupiditate quam?
+                        Illum, molestias accusamus? Et maiores fuga totam repudiandae atque maxime quaerat debitis
+                        repellendus? Molestias voluptates culpa cupiditate.</p>
+                </div>
+                <div class="info">
+                    <h4>what are your plans for the design fair?</h4>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam eaque consequatur maiores quam, ut
+                        labore quidem saepe natus cupiditate autem similique voluptatem dicta. Dolore autem quam, omnis
+                        neque corporis alias.</p>
+                </div>
+                <div class="info">
+                    <h4>when will we see your new ideas come to life?</h4>
+                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nostrum natus officia magni ab
+                        veritatis beatae recusandae mollitia iste, quod perferendis, quis molestias deleniti. Possimus
+                        animi officiis error, provident quibusdam quaerat.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock main_content %}

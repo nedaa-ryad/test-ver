@@ -1,0 +1,79 @@
+{% extends "app/base.html" %}
+{% load static %}
+
+{% block title %} NEWS {% endblock title %}
+
+
+{% block main_content %}
+<div class="news-head">
+    <div class="img"></div>
+    <h2>news</h2>
+</div>
+<div class="news-company">
+    <div class="container">
+        <div class="home-page">
+            <a href="{% url 'products:homePage' %}">home</a>
+            <span>/ news</span>
+        </div>
+        <div class="content-page">
+            <div class="page">
+                <img src="{% static 'app/images/banner/news_1.jpg' %}" alt="New_one">
+                <div class="content">
+                    <h3>exclusive projects all over the world</h3>
+                    <div class="data">
+                        <span>
+                            <i class="fa-regular fa-calendar-days"></i>
+                            january 2023
+                        </span>
+                        <span>
+                            <i class="fa-solid fa-eye"></i>
+                            100 views
+                        </span>
+                    </div>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus, reiciendis officiis
+                        distinctio nam aperiam saepe illo deserunt tenetur iste soluta nobis placeat, eum
+                        tempora repellat dolor doloremque cumque inventore? Vero[...]</p>
+                </div>
+            </div>
+            <div class="page">
+                <img src="{% static 'app/images/banner/news_2.jpg' %}" alt="New_two">
+                <div class="content">
+                    <h3>the white dove, superior handcrafted design furniture</h3>
+                    <div class="data">
+                        <span>
+                            <i class="fa-regular fa-calendar-days"></i>
+                            february 2023
+                        </span>
+                        <span>
+                            <i class="fa-solid fa-eye"></i>
+                            100 views
+                        </span>
+                    </div>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus, reiciendis officiis
+                        distinctio nam aperiam saepe illo deserunt tenetur iste soluta nobis placeat, eum
+                        tempora repellat dolor doloremque cumque inventore? Vero[...]</p>
+                </div>
+            </div>
+            <div class="page">
+                <img src="{% static 'app/images/banner/about_us_1.jpg' %}" alt="New_three">
+                <div class="content">
+                    <h3>The Saudi white dove flagship store</h3>
+                    <div class="data">
+                        <span>
+                            <i class="fa-regular fa-calendar-days"></i>
+                            march 2023
+                        </span>
+                        <span>
+                            <i class="fa-solid fa-eye"></i>
+                            100 views
+                        </span>
+                    </div>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus, reiciendis officiis
+                        distinctio nam aperiam saepe illo deserunt tenetur iste soluta nobis placeat, eum
+                        tempora repellat dolor doloremque cumque inventore? Vero[...]</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% endblock main_content%}

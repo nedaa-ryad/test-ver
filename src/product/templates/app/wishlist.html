@@ -1,0 +1,60 @@
+{% extends "app/base.html" %}
+{% load static %}
+
+{% block title %} WISHLIST {% endblock title %}
+
+{% block main_content %}
+<div class="container">
+    <div class="home-page">
+        <a href="{% url 'products:homePage' %}">home</a>
+        <a href="{% url 'product:All_Products' %}"> / All Products</a>
+        <span>/ wishlist</span>
+    </div>
+</div>
+
+<div class="wishlist-products">
+    <div class="container">
+        <div class="header">
+            <h2>wishlist</h2>
+        </div>
+        {% if wishlist_items %}
+        <div class="box-info">
+            {% for item in wishlist_items %}
+            <div>
+                <div class="box">
+                    <img src="{{ item.product.image.url }}" alt="{{ item.product.title }}">
+                    <div>
+                        <p>{{ item.product.description }}</p>
+                        {% if item.product.discountPrice > 0 %}
+                        <div class='discount'>
+                            <del>${{item.product.price}}</del>
+                            <span>${{item.product.discountPrice}}</span>
+                        </div>
+                        {% else %}
+                        <span class="price">${{item.product.price}}</span>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="box">
+                    <a href="{% url 'products:product_detail' item.product.id %}">
+                        <img src="{% static 'app/images/banner/icon-view-details.png' %}" alt="icon">
+                        show details
+                    </a>
+
+                    <form action="/add_to_cart">
+                        <input type="hidden" name="product_id" value="{{ item.product.id }}">
+                        <button type="submit">add to cart</button>
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% else %}
+<div class="wishlist-empty">
+    <h2>wishlist is empty</h2>
+</div>
+{% endif %}
+{% endblock main_content %}

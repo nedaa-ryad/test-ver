@@ -1,0 +1,65 @@
+{% extends "app/base.html" %}
+{% load static %}
+
+{% block title %} MODERN COLLECTION {% endblock title %}
+
+
+{% block main_content %}
+
+<section class="collection-page">
+    <div class="container">
+        <div class="home-page">
+            <a href="{% url 'products:homePage' %}">home</a>
+            <span>/ modern collection</span>
+        </div>
+        <div class="content">
+            <div class="text-collection">
+                <h2>modern-white dove <br> <span>collection</span></h2>
+                <p>saudi luxury furniture with modern design and artisanal production</p>
+            </div>
+            <div class="images">
+                <img src="{% static 'app/images/banner/collections-page1.jpg' %}" alt="Modern-Furniture">
+                <img src="{% static 'app/images/banner/modern2.jpg' %}" alt="Modern-Furniture">
+                <img src="{% static 'app/images/banner/modern3.jpg' %}" alt="Modern-Furniture">
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="bg-attachment">
+    <div class="bg-modern"></div>
+</div>
+
+<section class="products-collections">
+    <div class="container">
+        <div class="info">
+            <h2>exclusive luxury contemporary furnishings born from the saudi craftsmanship mastery</h2>
+            <p>Each product of the modern <span>white dove</span> collection is a unique and refined work, the result of
+                the skillful work of
+                the artisan and the contribution of some of the most brilliant nationally and internationally renowned
+                architects.</p>
+        </div>
+        <div class="products-images">
+            <div class="box">
+                <img src="{% static 'app/images/banner/collection-modern.jpg' %}" alt="Modern-Furniture" class="modern">
+                <div class="box-inside modern">
+                    <div>
+                        <img src="{% static 'app/images/banner/lamp.jpg' %}" alt="Modern-Furniture">
+                    </div>
+                    <div >
+                        <img src="{% static 'app/images/banner/collection5.jpg' %}" alt="Modern-Furniture">
+                    </div>
+                </div>
+            </div>
+            <div class="box">
+                <img src="{% static 'app/images/banner/Collections_page3.jpg' %}" alt="Modern-Furniture">
+            </div>
+        </div>
+        <a href="{% url 'product:All_Products' %}">
+            discover all the products
+            <i class="fa-solid fa-arrow-right fa-fade"></i>
+        </a>
+    </div>
+</section>
+
+{% endblock %}

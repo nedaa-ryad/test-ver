@@ -1,0 +1,132 @@
+{% extends "app/base.html" %}
+{% load static %}
+
+{% block title %} Product Details {% endblock title %}
+
+{% block main_content %}
+<div class="product-details">
+    <div class="container">
+        <div class="home-page">
+            <a href="{% url 'products:homePage' %}">home</a>
+            <a href="{% url 'product:All_Products' %}"> / All Products</a>
+            <a href="{% url 'products:category' products.category %}">/ {{ products.get_category_display }} list</a>
+            <span> / product details: {{products.title}} </span>
+        </div>
+        <div class="content">
+            <div class="product-items">
+                <div>
+                    {% for pi in products.productimage_set.all %}
+                    <div>
+                        <img src="{{ pi.images.url }}" alt="{{products.title}}"
+                            onclick="openModel('{{ pi.images.url }}')">
+                    </div>
+                    {% endfor %}
+                </div>
+                <div>
+                    {% if products.image %}
+                    <img src="{{ products.image.url }}" alt="{{products.title}}"
+                        onclick="openModel('{{ products.image.url }}')" />
+                    {% else %}
+                    <img src="{% static 'app/images/products/defult_img.jpg' %}" alt="{{products.title}}">
+                    {% endif %}
+                </div>
+            </div>
+            <div class="product-info">
+                <div>
+                    {% if products.isNew %}
+                    <span class="new">new</span>
+                    {% endif %}
+                    {% if products.isBestSeller %}
+                    <span class="seller"> best seller</span>
+                    {% endif %}
+                    {% if products.discountPrice > 0 %}
+                    <span class="sale">sale</span>
+                    {% endif %}
+                </div>
+                <div>
+                    <h2>{{products.title}}</h2>
+                    <p>{{products.description}}</p>
+                    {% if products.discountPrice > 0 %}
+                    <div>
+                        <del>${{products.price}}</del>
+                        <span>${{products.discountPrice}}</span>
+                    </div>
+                    {% else %}
+                    <span class="price">${{products.price}}</span>
+                    {% endif %}
+                </div>
+                <div>
+                    <a href="{% url 'products:show_cart' %}">buy now</a>
+                    <form action="/add_to_cart" class="shop">
+                        <input type="hidden" name="product_id" value="{{products.id }}">
+                        <i class="fa-solid fa-bag-shopping"></i>
+                        <button type="submit">add to cart</button>
+                    </form>
+                    {% if wishlist_products %}
+                    <a href="#" pid="{{ products.id }}" class="wishlist-btn minus-wishlist">
+                    <i class="fas fa-heart fa-lg minus"></i>
+                    </a>
+                    {% else %}
+                    <a href="#" pid="{{ products.id }}" class="wishlist-btn plus-wishlist">
+                        <i class="fas fa-heart fa-lg" ></i>
+                    </a>
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modal" class="modal">
+    <div class="model-content">
+        <span class="close" onclick="closeModel()">&times;</span>
+        <img id="modal-image" src="">
+        <div class="slide-images">
+            {% for pi in products.productimage_set.all %}
+            <img src="{{ pi.images.url }}" alt="{{products.title}}" onclick="openSlideImage('{{ pi.images.url }}')">
+            {% endfor %}
+            <img src="{{ products.image.url }}" alt="{{products.title}}"
+                onclick="openSlideImage('{{ products.image.url }}')">
+        </div>
+    </div>
+</div>
+
+<div class="related-products">
+    <div class="container">
+        <div class="header">
+            <h2>related products</h2>
+        </div>
+        <div class="box-info">
+            {% for related_product in related_products %}
+            <div>
+                <div class="box">
+                    <img src="{{ related_product.image.url }}" alt="{{ related_product.title }}">
+                    <div>
+                        <p>{{related_product.description}}</p>
+                        {% if related_product.discountPrice > 0 %}
+                        <div class='discount'>
+                            <del>${{related_product.price}}</del>
+                            <span>${{related_product.discountPrice}}</span>
+                        </div>
+                        {% else %}
+                        <span class="price">${{related_product.price}}</span>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="box">
+                    <a href="{% url 'products:product_detail' related_product.id %}">
+                        <img src="{% static 'app/images/banner/icon-view-details.png' %}" alt="icon">
+                        show details
+                    </a>
+                    <form action="/add_to_cart">
+                        <input type="hidden" name="product_id" value="{{related_product.id }}">
+                        <button type="submit">add to cart</button>
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock main_content %}

@@ -1,0 +1,117 @@
+{% extends "app/base.html" %}
+{% load static %}
+
+{% block title %}
+{{ val }} Products
+{% endblock title %}
+
+{% block main_content %}
+
+<div class="products">
+    <div class="container">
+        <div class="home-page">
+            <a href="{% url 'products:homePage' %}">home</a>
+            <span>/ {{ val }} products</span>
+        </div>
+    </div>
+    <div class="content">
+        <aside>
+            <ul>
+                <li class="list">
+                    <a href="{% url 'product:All_Products' %}">
+                        all
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'product:category' 'BE' %}">
+                        <img src="{% static 'app/images/banner/icon-bed.png'%}" alt="icon-bed" />
+                        <span>bed</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'product:category' 'SO' %}">
+                        <i class="fa-solid fa-couch"></i>
+                        <span>sofa</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'product:category' 'CH' %}">
+                        <i class="fa-solid fa-chair"></i>
+                        <span>chair</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'product:category' 'LI' %}">
+                        <i class="fa-solid fa-solar-panel"></i>
+                        <span>lighting</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'product:category' 'TA' %}">
+                        <img src="{% static 'app/images/banner/table-icon.png' %}" alt="icon-table" />
+                        <span>table</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'product:category' 'DT' %}">
+                        <img src="{% static 'app/images/banner/icon-dining-table.png' %} " alt="icon-dining-table" />
+                        <span>dining table</span>
+                    </a>
+                </li>
+            </ul>
+        </aside>
+        <div class="wrapper">
+            {% for Product in product_list %}
+            <div class="box list">
+                <a href="{% url 'products:product_detail' Product.id %}">
+                    <img class="li-img" src="{{ Product.image.url }}" alt="{{Product.title}}"/>
+                    <div>
+                        {% if Product.discountPrice > 0 %}
+                        <span>sale</span>
+                        {% endif %}
+                        {% if Product.isNew %}
+                        <span>new</span>
+                        {% endif %}
+                        {% if Product.isBestSeller %}
+                        <span> best seller</span>
+                        {% endif %}
+                    </div>
+                    <div class="info">
+                        <p>{{Product.description}}</p>
+                        {% if Product.discountPrice > 0 %}
+                        <div class="discountPrice">
+                            <del>${{Product.price}}</del>
+                            <span>${{Product.discountPrice}}</span>
+                        </div>
+                        {% else %}
+                        <span class="price">${{Product.price}}</span>
+                        {% endif %}
+                    </div>
+                    <span> > </span>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="pagination">
+        {% if all_product.has_other_pages %}
+        {% if all_product.has_previous %}
+        <a href="?page=1" class="previous">&laquo;</a>
+        {% endif %}
+    
+        {% for pages in all_product.paginator.page_range %}
+        {% if all_product.number == pages %}
+        <a class="page-num active" href="#">{{pages}}</a>
+        {% else %}
+        <a class="page-num" href="?page={{pages}}">{{pages}}</a>
+        {% endif %}
+        {% endfor %}
+    
+        {% if all_product.has_next %}
+        <a href="?page={{ all_product.paginator.num_pages }}" class="next"> &raquo;</a>
+        {% endif %}
+        {% endif %}
+    </div>
+</div>
+
+{% endblock main_content %}

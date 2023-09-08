@@ -1,0 +1,51 @@
+{% extends "app/base.html" %}
+{% load static %}
+
+{% block title %} SEARCH RESULT {% endblock title %}
+
+{% block main_content %}
+<div class="container">
+    <div class="home-page">
+        <a href="{% url 'products:homePage' %}">home</a>
+        <span>/ your search result</span>
+    </div>
+</div>
+
+<div class='search-result'>
+    <div class="container">
+        {% if product %}
+        <div class="box-info">
+            {% for prod in product %}
+            <div>
+                <div class="box">
+                    <img src="{{prod.image.url}}" alt="{{prod.title}}">
+                    <div>
+                        <p>{{ prod.title }}</p>
+                        {% if prod.discountPrice > 0 %}
+                        <div class='discount'>
+                            <del>${{prod.price}}</del>
+                            <span>${{prod.discountPrice}}</span>
+                        </div>
+                        {% else %}
+                        <span class="price">${{prod.price}}</span>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="box">
+                    <a href="{% url 'products:product_detail' prod.id %}">
+                        <img src="{% static 'app/images/banner/icon-view-details.png' %}" alt="icon">
+                        Show details
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% else %}
+<div class="result-empty">
+    <h2>your searching not found</h2>
+</div>
+{% endif %}
+
+{% endblock main_content %}

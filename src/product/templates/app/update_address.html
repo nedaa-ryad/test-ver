@@ -1,0 +1,57 @@
+{% extends "app/base.html" %}
+{% load static %}
+
+{% block title %} UPDATE ADDRESS {% endblock title %}
+
+{% block main_content %}
+
+<div class="update-address">
+    <div class="container">
+        <div class="home-page">
+            <a href="{% url 'products:homePage' %}">home</a>
+        </div>
+        <div class="account-detail">
+            <h2>account details</h2>
+        </div>
+        <div class="info-account">
+            <aside>
+                <h4>Hello <span class="text-red">{{request.user}}</span></h4>
+                <ul>
+                    <li>
+                        <a href="{% url 'products:profile' %}">profile</a>
+                    </li>
+                    <li class="active">
+                        <a href="{% url 'products:address' %}">address</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'products:password_change' %}">Change Password</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'products:logout' %}">Logout</a>
+                    </li>
+                </ul>
+            </aside>
+            <form method="post">
+                {% csrf_token %}
+                {% for fm in form %}
+                {{fm.label_tag}} {{fm}}
+                <small class="error"> {{fm.errors|striptags}} </small>
+                {% endfor %}
+
+                <div>
+                    <a href="{% url 'products:address' %}" class="btn">Back /</a> 
+                    <button type="submit">save</button>
+                </div>
+
+                {% if form.non_field_errors %}
+                {% for error in form.non_field_errors %}
+                <p class="error">
+                    {{error}}
+                </p>
+                {% endfor %}
+                {% endif %}
+            </form>
+        </div>
+    </div>
+
+    {% endblock main_content %}

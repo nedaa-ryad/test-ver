@@ -1,0 +1,27 @@
+{% extends "app/base.html" %}
+{% load static %}
+
+{% block title %} DELETE ADDRESS {% endblock title %}
+
+{% block main_content %}
+
+<div class="delete-address">
+    <div class="container">
+        <div class="home-page">
+            <a href="{% url 'products:homePage' %}">home</a>
+        </div>
+        <div class="account-detail">
+            <h2>delete address</h2>
+        </div>
+        <div>
+            <p>Are you sure you want to delete the address "{{ add.name }}"?</p>
+            <form method="post">
+                {% csrf_token %}
+                <a href="{% url 'products:address' %}" class="btn">Back /</a>
+                <button type="submit">delete</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock main_content %}

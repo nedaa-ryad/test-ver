@@ -1,0 +1,69 @@
+{% extends "app/base.html" %}
+{% load static %}
+
+{% block title %} ADDRESS {% endblock title %}
+
+{% block main_content %}
+
+<div class="address">
+    <div class="container">
+        <div class="home-page">
+            <a href="{% url 'products:homePage' %}">home</a>
+        </div>
+        <div class="account-detail">
+            <h2>account details</h2>
+        </div>
+        <div class="info-account">
+            <aside>
+                <h4>Hello <span class="text-red">{{request.user}}</span></h4>
+                <ul>
+                    <li>
+                        <a href="{% url 'products:profile' %}">profile</a>
+                    </li>
+                    <li class="active">
+                        <a href="{% url 'products:address' %}">address</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'products:password_change' %}">Change Password</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'products:logout' %}">Logout</a>
+                    </li>
+                </ul>
+            </aside>
+            <div>
+                {% for ad in add %}
+                <div>
+                    <h3>Address {{forloop.counter}}</h3>
+                    <p>
+                        Name:
+                        <span>{{ad.name}}</span>
+                    </p>
+                    <p>
+                        Locality:
+                        <span>{{ad.locality}}</span>
+                    </p>
+                    <p>
+                        City:
+                        <span>{{ad.city}}</span>
+                    </p>
+                    <p>
+                        Mobile:
+                        <span>{{ad.mobile}}</span>
+                    </p>
+                    <p>
+                        ZipCode:
+                        <span>{{ad.zipCode}}</span>
+                    </p>
+                    <div class="edit">
+                        <a href="{% url 'products:update_address' pk=ad.id %}" type="button">update /</a>
+                        <a href="{% url 'products:delete_address' pk=ad.id %}" type="button">delete</a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock main_content %}

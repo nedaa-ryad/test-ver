@@ -1,0 +1,61 @@
+{% extends "app/base.html" %}
+{% load static %}
+
+{% block title %} LOGIN {% endblock title %}
+
+{% block main_content %}
+<div class="login">
+    <div class="container">
+        <div class="home-page">
+            <a href="{% url 'products:homePage' %}">home</a>
+            <span>/ login</span>
+        </div>
+        <div>
+            <a href="#">
+                <i class="fa-brands fa-facebook fa-fw fa-lg"></i>
+                <span>continue with facebook</span>
+            </a>
+            <a href="#">
+                <i class="fa-brands fa-apple fa-fw fa-lg"></i>
+                <span>continue with apple</span>
+            </a>
+            <a href="#">
+                <i class="fa-brands fa-google fa-fw fa-lg"></i>
+                <span>continue with google</span>
+            </a>
+            <span></span>
+            <form method="post">
+                {% csrf_token %}
+                {% for fm in form %}
+                {% if fm.name == 'show_password' %}
+                <label for="{{ fm.id_for_label }}" class="show-password">
+                    {{ fm }} {{ fm.label }}
+                </label>
+                {% else %}
+                {{ fm.label_tag }} {{ fm }}
+                {% endif %}
+                <small class="error">{{ fm.errors|striptags }}</small>
+                {% endfor %}
+
+                
+                <div class="log">
+                    <span><a href="{% url 'products:password_reset' %}"> forgot your password?</a></span>
+                    <input type="submit" value="login">
+                </div>
+                <div>
+                    no account yet?
+                    <a href="{% url 'products:customerregistration' %}">create an account</a>
+                </div>
+                {% if form.non_field_errors %}
+                {% for error in form.non_field_errors %}
+                <p class="error">
+                    {{error}}
+                </p>
+                {% endfor %}
+                {% endif %}
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock main_content %}
+

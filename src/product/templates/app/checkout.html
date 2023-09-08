@@ -1,0 +1,129 @@
+{% extends "app/base.html" %}
+{% load static %}
+
+{% block title %} CHECKOUT {% endblock title %}
+
+{% block main_content %}
+<div class="checkout">
+    <div class="container">
+        <div class="home-page">
+            <a href="{% url 'products:homePage' %}">home</a>
+            <a href="{% url 'products:show_cart' %}">/ show cart</a>
+            <span>/ checkout</span>
+        </div>
+        <div class="checkout-info">
+            <div class="header">
+                <h2>Checkout</h2>
+            </div>
+
+
+            <div id="container">
+                <div>
+                    <h3>order summary</h3>
+                    {% for item in cart_items %}
+                    <div>
+                        <div class="img">
+                            <img src="{{ item.product.image.url }}" alt="{{ item.product.title }}">
+                            <span>{{item.quantity}}</span>
+                        </div>
+                        <div>
+                            <h5>{{item.product.title}}</h5>
+                            {% if item.product.discountPrice > 0 %}
+                            <div id="discount">
+                                <del>${{item.product.price}}</del>
+                                <span>${{item.product.discountPrice}}</span>
+                            </div>
+                            {% else %}
+                            <span>${{item.product.price}}</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <h4>total price + shipping = <strong>${{ totalamount }}</strong></h4>
+                </div>
+                <form method="post" id="payment-form">
+                    {% csrf_token %}
+                    <!-- <div id="card-element"></div> -->
+                    <!--place the payment form-->
+
+                    <div class="address">
+                        <h3>shipping address</h3>
+                        {% for ad in add %}
+                        <div>
+                            <h3>{{ad.name}}</h3>
+                            <p>Mobile: <span>{{ad.mobile}}</span></p>
+                            <p>{{ad.locality}} <span>|</span> {{ad.city}} <span>|</span> {{ad.zipCode}}</p>
+                            <div>
+                                <input type="radio" name="custid" id="custadd{{forloop.counter}}" value="{{ad.id}}">
+                                <label for="custadd{{forloop.counter}}">
+                                    Address: <span>{{forloop.counter}}</span>
+                                </label>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                    <div>
+                        <button type="submit">payment</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock main_content %}
+
+
+<!-- {% block payment-gateway %}
+<script>
+    var stripe = Stripe("pk_test_51NWdyEK3nUvDpRpiUX1JE72fAIY9JVga6KjZKzqlVTqf5ecWCHoUhS0Py1lj1WGK9m1So8RGFlyxXwhwO5yKQHar00BYeX5kUO");
+    document.addEventListener("DOMContentLoaded", function () {
+
+        var elements = stripe.elements();
+        var cardElement = elements.create('card');
+
+        cardElement.mount('#card-element');
+
+        var form = document.getElementById("payment-form");
+        var csrfToken = form.getAttribute('data-csrf-token');
+
+        form.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            var totalamount = parseFloat(document.querySelector("input[name='totalamount']").value);
+
+            fetch("/create-checkout-session/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": csrfToken, 
+                },
+                body: JSON.stringify({ totalamount: totalamount }),
+            })
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (data) {
+                    var clientSecret = data.clientSecret;
+
+                    stripe.confirmCardPayment(clientSecret, {
+                        payment_method: {
+                            card: cardElement,
+                        },
+                    }).then(function (result) {
+                        if (result.error) {
+                            console.error(result.error.message);
+                        } else if (result.paymentIntent.status === "succeeded") {
+                            window.location.href = "/success/?payment_intent=" + result.paymentIntent.id;
+                        }
+                    });
+                })
+                .catch(function (error) {
+                    console.error("Error:", error);
+                    //window.location.href = "/cancel/
+                });
+        });
+    });
+</script>
+{% endblock payment-gateway %} -->

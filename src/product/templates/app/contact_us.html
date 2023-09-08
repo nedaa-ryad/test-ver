@@ -1,0 +1,117 @@
+{% extends "app/base.html" %}
+{% load static %}
+
+{% block title %} CONTACT US {% endblock title %}
+
+
+{% block main_content %}
+
+<div class="container">
+    <div class="home-page">
+        <a href="{% url 'products:homePage' %}">home</a>
+        <span>/ contact us</span>
+    </div>
+</div>
+
+<div class="contacts">
+    <div class="container">
+        <div class="header">
+            <h2>we are here for you</h2>
+            <p>we can help. our team of experts is on hand to answer your questions.</p>
+        </div>
+        <div class="form-info">
+            <div class="info">
+                <h2>send a message</h2>
+                <form>
+                    <div class="data">
+                        <div class="box">
+                            <input type="text" name="text" id="user" required>
+                            <label for="user">first name</label>
+                        </div>
+                        <div class="box">
+                            <input type="text" name="text" id="user" required>
+                            <label for="user">last name</label>
+                        </div>
+                    </div>
+                    <div class="data">
+                        <div class="box">
+                            <input type="email" name="email" id="mail" required>
+                            <label for="mail">email</label>
+                        </div>
+                        <div class="box">
+                            <input type="number" name="num" id="num" required min="0">
+                            <label for="num">phone</label>
+                        </div>
+                    </div>
+                    <div class="country">
+                        <label for="countrys">country</label>
+                        <select name="country" id="countrys">
+                            <option>select a country...</option>
+                            <option value="Eg">Egypt</option>
+                            <option value="SA">Saudi Arabia</option>
+                            <option value="DU">Dubai</option>
+                            <option value="DE">Denmark</option>
+                            <option value="NE">Netherlands</option>
+                            <option value="AF">Afghanistan</option>
+                            <option value="FR">France</option>
+                            <option value="LE">Lebanon</option>
+                            <option value="PO">Poland</option>
+                            <option value="SY">Syria</option>
+                        </select>
+                    </div>
+                    <fieldset>
+                        <textarea name="msg" cols="30" rows="10"></textarea>
+                        <legend>tell us about your needs</legend>
+                    </fieldset>
+                    <div class="checkbox">
+                        <div class="box">
+                            <input type="checkbox" id="checkbox_1">
+                            <label for="checkbox_1">I've read and accept the conditions of the <span>Privacy
+                                    Policy</span></label>
+                        </div>
+                        <div class="box">
+                            <input type="checkbox" id="checkbox_2">
+                            <label for="checkbox_2">I also give consent to the processing of my data for the
+                                subscription of <span>white dove</span> newsletter and the receipt of periodic
+                                communications with informative and promotional content about products, events
+                                and initiatives offered by the same.</label>
+                        </div>
+                    </div>
+                    <a href="#"> send message
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </a>
+                </form>
+            </div>
+            <div class="content">
+                <h2>contact information</h2>
+                <div class="data">
+                    <div>
+                        <span>address:</span>
+                        al riyadh, saudi arabia
+                    </div>
+                    <div>
+                        <span>phone:</span>
+                        +966991274892
+                    </div>
+                    <div>
+                        <span>email:</span>
+                        info@example.com
+                    </div>
+
+                </div>
+                <h3>follow us</h3>
+                <ul class="link">
+                    <li><a href="#">facebook</a></li>
+                    <li><a href="#">instagram</a></li>
+                    <li><a href="#">linkedin</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock main_content %}
+
